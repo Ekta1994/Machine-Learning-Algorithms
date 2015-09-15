@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
 """
 Created on Tue Sep 15 20:13:30 2015
 
 @author: Ekta
 """
+import matplotlib.pyplot as plt
+import pylab
 import csv
 
 def gradient_descent(alpha, data, epsilon, max_iter):
@@ -16,7 +19,6 @@ def gradient_descent(alpha, data, epsilon, max_iter):
     #number of samples
     m = len(data)
     
-	#start with some initial values of theta0 and theta1
     t0 = 0
     t1 = 1
     
@@ -99,6 +101,11 @@ with open('data.txt', 'r') as csvfile:
     for i in range(0,len(data)):
         data[i][0] = float(data[i][0])
         data[i][1] = float(data[i][1])
+        x = data[i][0]
+        y = data[i][1]
+        plt.scatter(x,y)
+   
+    #plt.show()
     
     theta0,theta1 = gradient_descent(alpha,data,epsilon,max_iter)
     
@@ -106,4 +113,13 @@ with open('data.txt', 'r') as csvfile:
     print(float(theta0))
     print("The optimal values of theta1 = : ")
     print(float(theta1))
+    
+    
+    for i in range(0,len(data)-1):
+        x = data[i][0];
+        y = theta0 + theta1*x
+        pylab.scatter(x,y, c= 'r')
+        
+    print("Red marks show the predicted values")
+    print("Blue circles how the training output")
     
