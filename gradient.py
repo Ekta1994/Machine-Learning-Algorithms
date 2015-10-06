@@ -20,7 +20,7 @@ def gradient_descent(alpha, data, epsilon, max_iter):
     m = len(data)
     
     t0 = 0
-    t1 = 1
+    t1 = 0
     
     #cost function
     J = 0;
@@ -29,8 +29,9 @@ def gradient_descent(alpha, data, epsilon, max_iter):
         J = J + pow((t0 + t1*data[i][0] - data[i][1]),2)
     
     #Multiplying with 1/2m will give us the cost, we can instead minimise the mean squared error
-    #J = J*(1/(2*m))
-
+    J = J*(1/(2*m))
+    print('Initial cost is ' + str(J))
+    
     #Apply the gradient descent algorithm
     
     while( isconverge == 0):
@@ -65,6 +66,13 @@ def gradient_descent(alpha, data, epsilon, max_iter):
         
         #Multiplying with 1/2m will give us the cost
         #error = error*(1/(2*m))
+        
+        er = error * (1/(2*m));
+        
+        #for debugging, check that th cost at every step decreases. As we move towards the minimum in every iteration, it can't increase.
+        
+        #print('Cost for this iteration ' + str(iter_num) + ' is ' + str(er))
+       
             
         if abs(J-error) <= epsilon :
             print("Converged")
@@ -74,13 +82,13 @@ def gradient_descent(alpha, data, epsilon, max_iter):
         iter_num += 1
         
         if(iter_num == max_iter):
-            print("Maximum iterations reached")
+           # print("Maximum iterations reached")
             isconverge = 1
             
     return t0,t1
 
 #Let training samples be in file data.txt where each training sample is of the form (x,y)
-with open('data.txt', 'r') as csvfile:
+with open('ex1data1.txt', 'r') as csvfile:
     lines = csv.reader(csvfile)
     d= list(lines)
         
@@ -88,7 +96,7 @@ with open('data.txt', 'r') as csvfile:
     
     for i in range(0,len(d)):
         data.append(d[i])
-    
+            
     #learning rate
     alpha= 0.01
     
@@ -96,7 +104,7 @@ with open('data.txt', 'r') as csvfile:
     epsilon = 0.0001
     
     #maximum no. of iterations
-    max_iter = 1000
+    max_iter = 1500
     
     for i in range(0,len(data)):
         data[i][0] = float(data[i][0])
@@ -109,10 +117,8 @@ with open('data.txt', 'r') as csvfile:
     
     theta0,theta1 = gradient_descent(alpha,data,epsilon,max_iter)
     
-    print("The optimal values of theta0 = : ")
-    print(float(theta0))
-    print("The optimal values of theta1 = : ")
-    print(float(theta1))
+    print("The optimal values of theta0 = : " + str(theta0))
+    print("The optimal values of theta1 = : " + str(theta1))
     
     
     for i in range(0,len(data)-1):
@@ -120,6 +126,5 @@ with open('data.txt', 'r') as csvfile:
         y = theta0 + theta1*x
         pylab.scatter(x,y, c= 'r')
         
-    print("Red marks show the predicted values")
-    print("Blue circles how the training output")
+    print("In the below graph, red marks show the predicted values as per the gradient descent algorithm and blue marks show the initial profit")
     
