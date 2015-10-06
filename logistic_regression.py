@@ -6,9 +6,6 @@ Created on Sun Oct  4 18:11:53 2015
 @email: ektagoel04@gmail.com
 """
 
-#Implementing logistc regression
-#The algorithm is based on supervised learning where we have with us the training data with the correct class to which a particular training example will belong.
-
 import numpy as np
 import scipy.optimize as op
 import csv,math
