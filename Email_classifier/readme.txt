@@ -8,7 +8,7 @@
   - All numbers are replaced with their english name.
   - '$' sign is replaced with "dollar".
   
-  - For above, the initial version of the mail is shown in the image initialmailpng
+  - For above, the initial version of the mail is shown in the image initialmailpng.
   
 **Making of vocabulary list-:**
  - All the words of the above email are now maintained in the list with their counts.
