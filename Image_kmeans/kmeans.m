@@ -1,0 +1,64 @@
+function [centroids, idx] = kmeans(X,in_centroids,...
+                                        max_iterations)
+
+    [m n] = size(X);
+    K = size(in_centroids,1);
+    centroids = in_centroids;
+    
+    %idx(i) designates the cluster to which i'th pixel is assigned
+    idx = zeros(m,1);
+
+    for i = [1:max_iterations]
+        disp('Running for iteration : ');
+        disp(i);
+        
+        % Cluster Assignment Step
+        for j = [1:m]
+            
+            temp = zeros(K,n);
+            
+            for k = [1:K]
+                
+                %Calculating NORM or euclidiean distance
+                temp(k,:) = double(X(j,:)) - double(centroids(k,:));
+                temp(k,:) = double(temp(k,:).^2);
+                d(k) = double(sum(temp(k,:)));
+                
+            end;
+       
+            [min_dis,id] = min(d);
+        
+            idx(j) = id;
+        end;
+        
+        % Update Cluster Centroids
+        
+        new_centroids = zeros(K,n);
+        
+        for j = [1:K]
+            cnt=0;
+            
+            %Calculate mean of all the points belonging to this j'th
+            %cluster
+            for tr = [1:m]
+                
+                if ( idx(tr) == j)
+                    new_centroids(j,:) = double(new_centroids(j,:)) + double(X(tr,:));
+                    cnt = cnt+1;
+                end;
+            end;
+            
+            if cnt ~=0 
+                new_centroids(j,:) = double(new_centroids(j,:))./cnt;
+                new_centroids(j,:) = double(new_centroids(j,:));
+            end;
+            
+            if ( cnt == 0 )
+                new_centroids(j,:) = double(centroids(j,:));
+            end;
+            
+        end;
+        
+        centroids = new_centroids;
+    end;
+end
