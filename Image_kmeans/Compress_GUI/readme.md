@@ -1,6 +1,6 @@
 - The UI build asks the user to input the path of the image to be compressed. 
 - After specifying the path, Press the button to load the original image and then press "Start Compression" button.
 - The three axes displayed will show the image after compression using k-means when max_iterations are 15 and 5 respectively. 
-- The last axis, 3, will display the image after 'n' iterations where n refers too the maximum iterations k-means take to converge itself. 
+- The last axis, 3, will display the image after 'n' iterations where n refers to the maximum iterations k-means take to converge on its own. 
   - For the image 'bird_small.png', as per the run on my system, k-means converged after 60th iteration once and 150'th iteration also ( As centroids are selected randomly in the start). And hence, be patient after pressing the start button. The images will be visible after around 2-3 minutes.
   - Meanwhile, for cross-checking you can observe the output in you MATLAB prompt. The iteration number will be displayed there indicating that the execution hasn't completed yet.  
